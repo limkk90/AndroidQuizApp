@@ -54,7 +54,4 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
     public int getItemCount() {
         return mData.size();
     }
-
-
-
 }
