@@ -22,7 +22,6 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
         ViewHolder(View itemView){
             super(itemView);
-
             icon = itemView.findViewById(R.id.pCatImage);
             title = itemView.findViewById(R.id.pTitle);
             regDate = itemView.findViewById(R.id.pRegDate);
@@ -45,12 +44,15 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull QuizListAdapter.ViewHolder holder, int position) {
+        QuizListItem item = mData.get(position);
 
+        holder.title.setText(item.getpTitle());
+        holder.regDate.setText(item.getpRegDate());
+        holder.icon.setImageDrawable(item.getIconDrawable());
     }
-
     @Override
     public int getItemCount() {
-        return 0;
+        return mData.size();
     }
 
 
