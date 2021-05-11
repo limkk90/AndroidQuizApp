@@ -28,6 +28,9 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
             regDate = itemView.findViewById(R.id.pRegDate);
         }
     }
+    QuizListAdapter(ArrayList<QuizListItem> list) {
+        mData = list;
+    }
 
 
     @NonNull
@@ -37,7 +40,6 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.recycler_item, parent, false);
         QuizListAdapter.ViewHolder vh = new QuizListAdapter.ViewHolder(view);
-
         return vh;
     }
 
