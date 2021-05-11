@@ -3,6 +3,7 @@ package com.yju.wda.quizapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String insertPwd = mainBinding.pwdEditText.getText().toString();
                         if (adminPwd.equals(insertPwd)){
+                            Intent intent = new Intent(MainActivity.this, QuizList.class);
+                            startActivity(intent);
                             //인텐트 이동
                         }else{
                             mainBinding.mainLayout.setVisibility(View.VISIBLE);

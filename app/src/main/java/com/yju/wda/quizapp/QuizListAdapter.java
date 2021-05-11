@@ -1,9 +1,13 @@
 package com.yju.wda.quizapp;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -24,5 +28,29 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
             regDate = itemView.findViewById(R.id.pRegDate);
         }
     }
+
+
+    @NonNull
+    @Override
+    public QuizListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.recycler_item, parent, false);
+        QuizListAdapter.ViewHolder vh = new QuizListAdapter.ViewHolder(view);
+
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull QuizListAdapter.ViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
+
+
 
 }
