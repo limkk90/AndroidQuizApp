@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.yju.wda.quizapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    String adminPwd = "12345"; //설정 비밀번호
+    String adminPwd = "1"; //설정 비밀번호
     ActivityMainBinding mainBinding;
     ImageView imgAdminBtn;
     ConstraintLayout mainLayout, passwordLayout;

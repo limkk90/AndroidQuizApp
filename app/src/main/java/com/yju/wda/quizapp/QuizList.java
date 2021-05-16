@@ -2,6 +2,7 @@ package com.yju.wda.quizapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -22,6 +23,8 @@ public class QuizList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //문제 출제 화면으로 넘어가게
+                Intent intent = new Intent(QuizList.this, SettingActivity.class);
+                startActivity(intent);
             }
         });
 
