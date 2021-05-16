@@ -16,13 +16,14 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
     private ArrayList<QuizListItem> mData = null;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView type;
         ImageView icon;
         TextView title;
         TextView regDate;
 
         ViewHolder(View itemView){
             super(itemView);
-            icon = itemView.findViewById(R.id.pCatImage);
+            type = itemView.findViewById(R.id.pType);
             title = itemView.findViewById(R.id.pTitle);
             regDate = itemView.findViewById(R.id.pRegDate);
         }
@@ -48,7 +49,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
         holder.title.setText(item.getpTitle());
         holder.regDate.setText(item.getpRegDate());
-        holder.icon.setImageDrawable(item.getIconDrawable());
+        holder.type.setText(item.getpType());
     }
     @Override
     public int getItemCount() {

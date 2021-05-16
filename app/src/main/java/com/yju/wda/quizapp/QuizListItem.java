@@ -3,26 +3,25 @@ package com.yju.wda.quizapp;
 import android.graphics.drawable.Drawable;
 
 public class QuizListItem {
-    Drawable iconDrawable;
+    String pType;
     String pTitle;
     String pRegDate;
-
 
     @Override
     public String toString() {
         return "QuizListItem{" +
-                "iconDrawable=" + iconDrawable +
+                "pType='" + pType + '\'' +
                 ", pTitle='" + pTitle + '\'' +
                 ", pRegDate='" + pRegDate + '\'' +
                 '}';
     }
 
-    public Drawable getIconDrawable() {
-        return iconDrawable;
+    public String getpType() {
+        return pType;
     }
 
-    public void setIconDrawable(Drawable iconDrawable) {
-        this.iconDrawable = iconDrawable;
+    public void setpType(String pType) {
+        this.pType = pType;
     }
 
     public String getpTitle() {
