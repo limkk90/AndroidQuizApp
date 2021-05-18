@@ -1,6 +1,7 @@
 package com.yju.wda.quizapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +12,28 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHolder> {
-    private ArrayList<QuizListItem> mData = null;
+    private List<QuizListItem> mData = null;
 
+    //인터페이스 정의
+    public interface OnItemClickListener{
+        void onItemClick(View v, int pos);
+    }
+
+    private OnItemClickListener listener = null;
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+
+    QuizListAdapter(List<QuizListItem> list) {
+        mData = list;
+        Log.i("Adapter", "QuizListAdapter: " + mData.toString());
+    }
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView type;
-        ImageView icon;
         TextView title;
         TextView regDate;
 
@@ -26,11 +42,22 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
             type = itemView.findViewById(R.id.pType);
             title = itemView.findViewById(R.id.pTitle);
             regDate = itemView.findViewById(R.id.pRegDate);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    Integer posStr = Integer.valueOf(pos);
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(listener != null){
+                            listener.onItemClick(v, pos);
+                        }
+                    }
+                }
+            });
         }
     }
-    QuizListAdapter(ArrayList<QuizListItem> list) {
-        mData = list;
-    }
+
 
 
     @NonNull
@@ -45,6 +72,7 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull QuizListAdapter.ViewHolder holder, int position) {
+
         QuizListItem item = mData.get(position);
 
         holder.title.setText(item.getpTitle());
@@ -54,5 +82,10 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    public void setData(List<QuizListItem> data){
+        this.mData = data;
+        notifyDataSetChanged();
     }
 }
