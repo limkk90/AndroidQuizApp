@@ -1,11 +1,13 @@
 package com.yju.wda.quizapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class QuizView extends AppCompatActivity {
     int id;
@@ -31,6 +39,7 @@ public class QuizView extends AppCompatActivity {
     RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
     //정답 변수
     int correct;
+    int upCorrect;
     //텍스트 문제 출제
     EditText edtP1, edtP2, edtP3, edtP4;
     String strEdtP1, strEdtP2, strEdtP3, strEdtP4;
@@ -82,6 +91,71 @@ public class QuizView extends AppCompatActivity {
                 radioGroup.check(R.id.radioButton4);
 
 
+
+            // 텍스트 레이아웃 업데이트 버튼 눌렀을 때
+            buttonUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), "텍스트 업뎃눌림", Toast.LENGTH_SHORT).show();
+
+                    long systemTime = System.currentTimeMillis();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+                    String dTime = format.format(systemTime);
+                    stredtProblem = edtProblem.getText().toString();
+                    strEdtScore = edtScore.getText().toString();
+                    strEdtP1 = edtP1.getText().toString();
+                    strEdtP2 = edtP2.getText().toString();
+                    strEdtP3 = edtP3.getText().toString();
+                    strEdtP4 = edtP4.getText().toString();
+
+                    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup group, int checkedId) {
+                            if(checkedId == R.id.radioButton1){
+                                upCorrect = 1;
+                            }
+                            if(checkedId == R.id.radioButton2){
+                                upCorrect = 2;
+                            }
+                            if(checkedId == R.id.radioButton3){
+                                upCorrect = 3;
+                            }
+                            if(checkedId == R.id.radioButton4){
+                                upCorrect = 4;
+                            }
+                        }
+                    });
+                    Log.i("textUpdate", "onClick: " + stredtProblem);
+                    Log.i("textUpdate", "onClick: " + strEdtScore);
+                    Log.i("textUpdate", "onClick: " + strEdtP1);
+                    Log.i("textUpdate", "onClick: " + strEdtP2);
+                    Log.i("textUpdate", "onClick: " + strEdtP3);
+                    Log.i("textUpdate", "onClick: " + strEdtP4);
+                    Log.i("textUpdate", "onClick: " + upCorrect);
+                    quizListItem.setpTitle(stredtProblem);
+                    quizListItem.setpRegDate(dTime);
+                    quizListItem.setScore(strEdtScore);
+                    quizListItem.setEdt1(strEdtP1);
+                    quizListItem.setEdt2(strEdtP2);
+                    quizListItem.setEdt3(strEdtP3);
+                    quizListItem.setEdt4(strEdtP4);
+                    quizListItem.setCorrect(upCorrect);
+
+                    db.quizDao().update(quizListItem);
+                    finish();
+                }
+            });
+
+            //텍스트 레이아웃 삭제버튼 눌렀을 때
+            buttonDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), "버튼 눌림", Toast.LENGTH_SHORT).show();
+                    db.quizDao().delete(quizListItem);
+                    Toast.makeText(getApplicationContext(), "텍스트 데이터 삭제완료", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
         }
         if(type.equals("I")){
             int correct = quizListItem.getCorrect();
@@ -114,14 +188,184 @@ public class QuizView extends AppCompatActivity {
                 radioGroup.check(R.id.radioButton3);
             if(correct == 4)
                 radioGroup.check(R.id.radioButton4);
+
+            buttonImg1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(intent, 1);
+                }
+            });
+
+            buttonImg2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(intent, 2);
+                }
+            });
+
+            buttonImg3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(intent, 3);
+                }
+            });
+
+            buttonImg4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(intent, 4);
+                }
+            });
+
+
+            //이미지 레이아웃 업데이트 버튼
+            buttonUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), "이미지 업뎃눌림", Toast.LENGTH_SHORT).show();
+
+                    long systemTime = System.currentTimeMillis();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+                    String dTime = format.format(systemTime);
+                    stredtProblem = edtProblem.getText().toString();
+                    strEdtScore = edtScore.getText().toString();
+
+                    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup group, int checkedId) {
+                            if(checkedId == R.id.radioButton1){
+                                upCorrect = 1;
+                            }
+                            if(checkedId == R.id.radioButton2){
+                                upCorrect = 2;
+                            }
+                            if(checkedId == R.id.radioButton3){
+                                upCorrect = 3;
+                            }
+                            if(checkedId == R.id.radioButton4){
+                                upCorrect = 4;
+                            }
+                        }
+                    });
+
+                    quizListItem.setpTitle(stredtProblem);
+                    quizListItem.setpRegDate(dTime);
+                    quizListItem.setScore(strEdtScore);
+                    quizListItem.setImg1(imageViewToByte(imageView1));
+                    quizListItem.setImg2(imageViewToByte(imageView2));
+                    quizListItem.setImg3(imageViewToByte(imageView3));
+                    quizListItem.setImg4(imageViewToByte(imageView4));
+                    quizListItem.setCorrect(upCorrect);
+                    db.quizDao().update(quizListItem);
+                    finish();
+//                    quizListItem.setpTitle(stredtProblem);
+//                    quizListItem.setpRegDate(dTime);
+//                    quizListItem.setScore(strEdtScore);
+//                    quizListItem.setEdt1(strEdtP1);
+//                    quizListItem.setEdt2(strEdtP2);
+//                    quizListItem.setEdt3(strEdtP3);
+//                    quizListItem.setEdt4(strEdtP4);
+//                    quizListItem.setCorrect(upCorrect);
+//
+//                    db.quizDao().update(quizListItem);
+//                    finish();
+                }
+            });
+            //이미지 레이아웃 삭제 버튼
+            buttonDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), "버튼 눌림", Toast.LENGTH_SHORT).show();
+                    db.quizDao().delete(quizListItem);
+                    Toast.makeText(getApplicationContext(), "이미지 데이터 삭제완료", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode ==1){
+            if(resultCode == RESULT_OK){
+                try{
+                    InputStream in = getContentResolver().openInputStream(data.getData());
+                    bitmap1 = BitmapFactory.decodeStream(in);
+                    in.close();
+                    imageView1.setImageBitmap(bitmap1);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        if(requestCode == 2){
+            if(resultCode == RESULT_OK){
+                try{
+                    InputStream in = getContentResolver().openInputStream(data.getData());
+                    bitmap2 = BitmapFactory.decodeStream(in);
+                    in.close();
+                    Log.e("Img", "onActivityResult: " + bitmap2 );
+                    imageView2.setImageBitmap(bitmap2);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        if(requestCode == 3){
+            if(resultCode == RESULT_OK){
+                try{
+                    InputStream in = getContentResolver().openInputStream(data.getData());
+                    bitmap3 = BitmapFactory.decodeStream(in);
+                    in.close();
+                    Log.e("Img", "onActivityResult: " + bitmap3 );
+                    imageView3.setImageBitmap(bitmap3);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        if(requestCode == 4){
+            if(resultCode == RESULT_OK){
+                try{
+                    InputStream in = getContentResolver().openInputStream(data.getData());
+                    bitmap4 = BitmapFactory.decodeStream(in);
+                    in.close();
+                    Log.e("Img", "onActivityResult: " + bitmap4 );
+                    imageView4.setImageBitmap(bitmap4);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private byte[] imageViewToByte(ImageView image){ //9
+        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
     }
 
     public void init(){
         //삭제,수정버튼
         buttonDelete = findViewById(R.id.buttonDelete);
         buttonUpdate = findViewById(R.id.buttonUpdate);
-        
+
         //문제점수 배점
         edtScore = findViewById(R.id.editTextTextScore);
         //문제

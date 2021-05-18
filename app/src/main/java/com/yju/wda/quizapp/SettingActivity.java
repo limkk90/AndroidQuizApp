@@ -111,20 +111,16 @@ public class SettingActivity extends AppCompatActivity {
                     radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(RadioGroup group, int checkedId) {
-                            Log.i("checkedId", "onCheckedChanged: "  + checkedId);
                             if(checkedId == R.id.radioButton1){
                                 correct = 1;
                             }
                             if(checkedId == R.id.radioButton2){
-                                Log.i("checkedId", "onCheckedChanged: "  + checkedId);
                                 correct = 2;
                             }
                             if(checkedId == R.id.radioButton3){
-                                Log.i("checkedId", "onCheckedChanged: "  + checkedId);
                                 correct = 3;
                             }
                             if(checkedId == R.id.radioButton4){
-                                Log.i("checkedId", "onCheckedChanged: "  + checkedId);
                                 correct = 4;
                             }
 
@@ -180,11 +176,12 @@ public class SettingActivity extends AppCompatActivity {
                             Log.i("Setting", "onClick: " + bitmap4);
                             db.quizDao().insert(new QuizListItem("I", stredtProblem, dTime, strEdtScore, correct,
                                     null, null, null, null, imageViewToByte(imageView1), imageViewToByte(imageView2), imageViewToByte(imageView3), imageViewToByte(imageView4)));
+                            finish();
 
                         }
                     });
                 }
-                //===================================이미지문제 출제=============================이미지 문제 출제
+                //===================================텍스트문제 출제=============================텍스트 문제 출제
                 else{
                     Toast.makeText(SettingActivity.this, "텍스트 눌림", Toast.LENGTH_SHORT).show();
                     textLayout.setVisibility(View.VISIBLE);
@@ -230,6 +227,7 @@ public class SettingActivity extends AppCompatActivity {
                             //DB에 넣어줘야 됨
                             db.quizDao().insert(new QuizListItem("T", stredtProblem, dTime, strEdtScore, correct,
                                     strEdtP1, strEdtP2, strEdtP3, strEdtP4, null, null, null, null));
+                            finish();
                         }
                     });
                 }
