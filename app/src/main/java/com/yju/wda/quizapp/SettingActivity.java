@@ -85,10 +85,10 @@ public class SettingActivity extends AppCompatActivity {
         radioButton3 = findViewById(R.id.radioButton3);
         radioButton4 = findViewById(R.id.radioButton4);
         //텍스트 문제 1,2,3,4
-        edtP1 = findViewById(R.id.edtP1);
-        edtP2 = findViewById(R.id.edtP2);
-        edtP3 = findViewById(R.id.edtP3);
-        edtP4 = findViewById(R.id.edtP4);
+        edtP1 = findViewById(R.id.quizP1);
+        edtP2 = findViewById(R.id.quizP2);
+        edtP3 = findViewById(R.id.quizP3);
+        edtP4 = findViewById(R.id.quizP4);
         //이미지 문제 뷰 & 버튼
         imageView1 = findViewById(R.id.imageView1);
         imageView2 = findViewById(R.id.imageView2);

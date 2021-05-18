@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.yju.wda.quizapp.databinding.ActivityMainBinding;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         passwordLayout = findViewById(R.id.passwordLayout);
         mainBinding.mainLayout.setVisibility(View.VISIBLE);
         mainBinding.passwordLayout.setVisibility(View.GONE);
+
+        //이미지 버튼 눌렀을 때 관리자 모드 들어가기
         mainBinding.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +51,40 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+
             }
         });
+        //============================================================
+        //EasyMode, HardMode초이스
+        mainBinding.mainRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.easyRadioBtn){
+                    mainBinding.mainSelectText.setText("이지모드ㄱㄱ");
+                    mainBinding.mainStartBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
+                            intent.putExtra("choice", "E");
+                            startActivity(intent);
+                        }
+                    });
+                }
+                if(checkedId == R.id.hardRadioBtn){
+                    mainBinding.mainSelectText.setText("하드모드ㄱㄱ");
+                    mainBinding.mainStartBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
+                            intent.putExtra("choice", "H");
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+        });
+
+
     }
 }

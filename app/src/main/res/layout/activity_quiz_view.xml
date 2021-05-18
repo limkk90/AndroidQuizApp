@@ -80,7 +80,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-                android:id="@+id/edtP1"
+                android:id="@+id/quizP1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -89,7 +89,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/edtP2"
+                android:id="@+id/quizP2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -98,7 +98,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/edtP3"
+                android:id="@+id/quizP3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -107,7 +107,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/edtP4"
+                android:id="@+id/quizP4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
