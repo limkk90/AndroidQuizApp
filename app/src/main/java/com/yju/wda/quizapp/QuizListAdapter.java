@@ -47,7 +47,6 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
-                    Integer posStr = Integer.valueOf(pos);
                     if(pos != RecyclerView.NO_POSITION){
                         if(listener != null){
                             listener.onItemClick(v, pos);
@@ -87,5 +86,9 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.ViewHo
     public void setData(List<QuizListItem> data){
         this.mData = data;
         notifyDataSetChanged();
+    }
+
+    public QuizListItem getItem(int position){
+        return mData.get(position);
     }
 }

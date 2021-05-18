@@ -171,7 +171,16 @@ public class QuizList extends AppCompatActivity {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-
+        adapter.setOnItemClickListener(new QuizListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+                int id = adapter.getItem(pos).getId();
+                Log.i("ItemClick", "onItemClick: "+id);
+                Intent intent = new Intent(getApplicationContext(), QuizView.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+        });
 
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override

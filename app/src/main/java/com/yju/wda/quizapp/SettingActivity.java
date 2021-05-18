@@ -70,7 +70,7 @@ public class SettingActivity extends AppCompatActivity {
         //토글버튼
         toggleButton = (ToggleButton)findViewById(R.id.toggleButton);
         //저장버튼
-        buttonSave = (Button)findViewById(R.id.buttonSave);
+        buttonSave = (Button)findViewById(R.id.buttonDelete);
         //문제점수 배점
         edtScore = findViewById(R.id.editTextTextScore);
         //문제
@@ -111,16 +111,20 @@ public class SettingActivity extends AppCompatActivity {
                     radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(RadioGroup group, int checkedId) {
+                            Log.i("checkedId", "onCheckedChanged: "  + checkedId);
                             if(checkedId == R.id.radioButton1){
                                 correct = 1;
                             }
                             if(checkedId == R.id.radioButton2){
+                                Log.i("checkedId", "onCheckedChanged: "  + checkedId);
                                 correct = 2;
                             }
                             if(checkedId == R.id.radioButton3){
+                                Log.i("checkedId", "onCheckedChanged: "  + checkedId);
                                 correct = 3;
                             }
                             if(checkedId == R.id.radioButton4){
+                                Log.i("checkedId", "onCheckedChanged: "  + checkedId);
                                 correct = 4;
                             }
 
@@ -174,7 +178,7 @@ public class SettingActivity extends AppCompatActivity {
                             Log.i("Setting", "onClick: " + bitmap2);
                             Log.i("Setting", "onClick: " + bitmap3);
                             Log.i("Setting", "onClick: " + bitmap4);
-                            db.quizDao().insert(new QuizListItem("T", stredtProblem, dTime, strEdtScore, correct,
+                            db.quizDao().insert(new QuizListItem("I", stredtProblem, dTime, strEdtScore, correct,
                                     null, null, null, null, imageViewToByte(imageView1), imageViewToByte(imageView2), imageViewToByte(imageView3), imageViewToByte(imageView4)));
 
                         }

@@ -12,9 +12,11 @@ public interface QuizDao {
     @Query("SELECT * FROM QuizListItem")
     List<QuizListItem> getAll();
 
+    @Query("SELECT * FROM QuizListItem WHERE id = :id")
+    QuizListItem getQuiz(int id);
+
     @Insert
     void insert(QuizListItem quizListItem);
-
 
 
 }
