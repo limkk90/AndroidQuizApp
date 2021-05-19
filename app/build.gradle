@@ -3,11 +3,16 @@ plugins {
 }
 
 android {
+
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
     android {
         buildFeatures {
             viewBinding = true
+        }
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
         }
     }
     defaultConfig {

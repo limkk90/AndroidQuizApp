@@ -170,7 +170,7 @@ public class QuizView extends AppCompatActivity {
             //이미지2
             byte img2[] = quizListItem.getImg2();
             Bitmap bitmap2 = BitmapFactory.decodeByteArray(img2, 0, img2.length);
-            imageView2.setImageBitmap(bitmap1);
+            imageView2.setImageBitmap(bitmap2);
              //이미지3
             byte img3[] = quizListItem.getImg3();
             Bitmap bitmap3 = BitmapFactory.decodeByteArray(img3, 0, img3.length);
@@ -229,6 +229,24 @@ public class QuizView extends AppCompatActivity {
                 }
             });
 
+            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    if(checkedId == R.id.radioButton1){
+                        upCorrect = 1;
+                    }
+                    if(checkedId == R.id.radioButton2){
+                        upCorrect = 2;
+                    }
+                    if(checkedId == R.id.radioButton3){
+                        upCorrect = 3;
+                    }
+                    if(checkedId == R.id.radioButton4){
+                        upCorrect = 4;
+                    }
+                }
+            });
+
 
             //이미지 레이아웃 업데이트 버튼
             buttonUpdate.setOnClickListener(new View.OnClickListener() {
@@ -242,23 +260,7 @@ public class QuizView extends AppCompatActivity {
                     stredtProblem = edtProblem.getText().toString();
                     strEdtScore = edtScore.getText().toString();
 
-                    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(RadioGroup group, int checkedId) {
-                            if(checkedId == R.id.radioButton1){
-                                upCorrect = 1;
-                            }
-                            if(checkedId == R.id.radioButton2){
-                                upCorrect = 2;
-                            }
-                            if(checkedId == R.id.radioButton3){
-                                upCorrect = 3;
-                            }
-                            if(checkedId == R.id.radioButton4){
-                                upCorrect = 4;
-                            }
-                        }
-                    });
+
 
                     quizListItem.setpTitle(stredtProblem);
                     quizListItem.setpRegDate(dTime);

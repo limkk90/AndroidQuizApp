@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
-                            intent.putExtra("choice", "E");
                             startActivity(intent);
                         }
                     });
@@ -76,15 +75,12 @@ public class MainActivity extends AppCompatActivity {
                     mainBinding.mainStartBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
-                            intent.putExtra("choice", "H");
+                            Intent intent = new Intent(getApplicationContext(), HardActivity.class);
                             startActivity(intent);
                         }
                     });
                 }
             }
         });
-
-
     }
 }
