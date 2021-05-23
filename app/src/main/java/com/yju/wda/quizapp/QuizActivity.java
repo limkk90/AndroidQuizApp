@@ -195,15 +195,17 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AtomicInteger sumScore = new AtomicInteger();
                 Log.i("submit", "onClick: " + qList.get(quizNum.get()).getCorrect());
-                if(qList.get(quizNum.get()).getCorrect() == userChoice){
-                    Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_SHORT).show();
-                    userScore= sumScore.intValue() + Integer.parseInt(qList.get(quizNum.get()).getScore());
-                    Log.i("HA", "onClick: " + userScore);
 
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "오답입니다", Toast.LENGTH_SHORT).show();
-                }
+//                if(qList.get(quizNum.get()).getCorrect() == userChoice){
+//                    Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_SHORT).show();
+////                userScore= sumScore.intValue() + Integer.parseInt(qList.get(quizNum.get()).getScore());
+//                    Log.i("HA", "onClick: " + userScore);
+//
+//                }
+//                else{
+//                    Toast.makeText(getApplicationContext(), "오답입니다", Toast.LENGTH_SHORT).show();
+//                }
+
                 quizNum.addAndGet(1);
                 if(quizNum.get() < qList.size()){
                     problem(qList, quizNum, qList.get(quizNum.get()));
@@ -245,6 +247,16 @@ public class QuizActivity extends AppCompatActivity {
                 }
             });
 
+            if(qList.get(quizNum.get()).getCorrect() == userChoice){
+                Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_SHORT).show();
+//                userScore= sumScore.intValue() + Integer.parseInt(qList.get(quizNum.get()).getScore());
+                Log.i("HA", "onClick: " + userScore);
+
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "오답입니다", Toast.LENGTH_SHORT).show();
+            }
+
         }
         //===========================================이미지==============================
         if(quizListItem.getpType().equals("I")){
@@ -285,6 +297,18 @@ public class QuizActivity extends AppCompatActivity {
                     }
                 }
             });
+
+            if(qList.get(quizNum.get()).getCorrect() == userChoice){
+                Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_SHORT).show();
+//                userScore= sumScore.intValue() + Integer.parseInt(qList.get(quizNum.get()).getScore());
+                Log.i("HA", "onClick: " + userScore);
+
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "오답입니다", Toast.LENGTH_SHORT).show();
+            }
+
+
         }
     }
 
