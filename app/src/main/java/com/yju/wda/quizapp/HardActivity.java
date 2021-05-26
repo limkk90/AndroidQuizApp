@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class HardActivity extends AppCompatActivity {
+    List<QuizListItem> qList;
     Button buttonSubmit;
     AppDatabase db;
     TextView txtScore, txtNowP, txtallP, txtProblem;
@@ -45,7 +46,7 @@ public class HardActivity extends AppCompatActivity {
         db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "quiz-db")
                 .allowMainThreadQueries()
                 .build();
-        List<QuizListItem> qList = db.quizDao().getAll();
+        qList = db.quizDao().getAll();
         AtomicInteger quizNum = new AtomicInteger();
         AtomicInteger sumScore = new AtomicInteger();
 
@@ -54,16 +55,6 @@ public class HardActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(strCorrect.equals(userAnswer)){
-                    Toast.makeText(HardActivity.this, "정답입니다", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(HardActivity.this, "틀렸습니다", Toast.LENGTH_SHORT).show();
-                }
-                if(userChoice == qList.get(quizNum.get()).getCorrect()){
-                    Toast.makeText(HardActivity.this, "정답입니다", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(HardActivity.this, "틀렸습니다", Toast.LENGTH_SHORT).show();
-                }
                 quizNum.addAndGet(1);
                 if(quizNum.get() < qList.size()){
                     problem(qList, quizNum, qList.get(quizNum.get()));
@@ -97,6 +88,12 @@ public class HardActivity extends AppCompatActivity {
             }
             //정답 가져옴
             userAnswer = userAns.getText().toString();
+
+            if(strCorrect.equals(userAnswer)){
+                Toast.makeText(HardActivity.this, "정답입니다", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(HardActivity.this, "틀렸습니다", Toast.LENGTH_SHORT).show();
+            }
 
 //            quizP1.setText(quizListItem.getEdt1());
 //            quizP2.setText(quizListItem.getEdt2());
@@ -142,6 +139,13 @@ public class HardActivity extends AppCompatActivity {
                     }
                 }
             });
+
+            if(userChoice == qList.get(quizNum.get()).getCorrect()){
+                Toast.makeText(HardActivity.this, "정답입니다", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(HardActivity.this, "틀렸습니다", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 
