@@ -172,7 +172,7 @@ public class QuizActivity extends AppCompatActivity {
     RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
     ImageView imageView1, imageView2, imageView3, imageView4;
     Bitmap bitmap1, bitmap2, bitmap3, bitmap4;
-
+    String sumScore;
     int userScore;
     int userChoice;
     @Override
@@ -249,7 +249,7 @@ public class QuizActivity extends AppCompatActivity {
 
             if(qList.get(quizNum.get()).getCorrect() == userChoice){
                 Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_SHORT).show();
-//                userScore= sumScore.intValue() + Integer.parseInt(qList.get(quizNum.get()).getScore());
+                userScore= Integer.valueOf(sumScore) + Integer.parseInt(qList.get(quizNum.get()).getScore());
                 Log.i("HA", "onClick: " + userScore);
 
             }
@@ -300,7 +300,7 @@ public class QuizActivity extends AppCompatActivity {
 
             if(qList.get(quizNum.get()).getCorrect() == userChoice){
                 Toast.makeText(getApplicationContext(), "정답입니다", Toast.LENGTH_SHORT).show();
-//                userScore= sumScore.intValue() + Integer.parseInt(qList.get(quizNum.get()).getScore());
+                userScore= Integer.valueOf(sumScore) + Integer.parseInt(qList.get(quizNum.get()).getScore());
                 Log.i("HA", "onClick: " + userScore);
 
             }
